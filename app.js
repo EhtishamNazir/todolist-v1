@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const app = express();
 
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(express.static("public"))
 
 let items = ["Buy Food", "Cook Food", "Eat Food"];
 
@@ -20,7 +21,7 @@ app.get("/", (req, res) => {
 
 	day = today.toLocaleDateString("en-us", options);
 
-	res.render("list", {kindOfDay: day, newListItems: items});
+	res.render("list", {listTitle: day, newListItems: items});
 	
 });
 
