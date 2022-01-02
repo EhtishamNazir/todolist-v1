@@ -1,30 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Todo List</title>
-	<link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+<%- include("header") -%>
 	<div class="box" id="heading">
 		<h1><%= listTitle %></h1>
 	</div>
 	
 	<div class="box">
-		<% for(let i=0; i < newListItems.length; i++){ %>
+		<% newListItems.forEach(function(listItem){ %>
 		<div class="item">
 			<input type="checkbox">
-			<p><%= newListItems[i] %></p>
+			<p><%= listItem.name %></p>
 		</div>
-		<% } %>
+		<% }) %>
 
 		<form class="item" action="/" method="post">
 			<input type="text" name="newItem" placeholder="New Item..." autocomplete="off" />
-			<button type="submit" name="button">+</button>
+			<button type="submit" name="list" value="<%= listTitle %>">+</button>
 		</form>
 	</div>	
 
-	
-</body>
-</html>
+<%- include("footer") -%>	
