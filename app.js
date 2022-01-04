@@ -49,16 +49,31 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-	item = req.body.newItem;
 
-	if (req.body.list === "Work") {
-		workItems.push(item);
-		res.redirect("/work");
-	}
-	else{
-		items.push(item);
-		res.redirect("/");
-	}
+	itemName = req.body.newItem;
+
+	const item = new Item({
+		name: itemName
+	});
+
+	item.save();
+
+	res.redirect("/");
+		
+});
+
+app.post("/delete", (req, res) => {
+
+	const checkedItemId = req.body.checkbox;
+
+	Item.findByIdAndRemove(checkedItemId, function(err) {
+		if (err) {
+			console.log(err);
+		} else{
+			console.log("Item deleted successfully");
+			res.redirect("/");
+		}
+	});
 		
 });
 
